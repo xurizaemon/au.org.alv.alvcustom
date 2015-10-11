@@ -1,9 +1,10 @@
+{literal}
+<script type="text/javascript">
 /**
  * @TODO "Donate now" instead of Contribute.
  * @TODO "Join Now"
  */
-/*
-  (function($) {
+(function($) {
   var alvCustom = {
     init: function() {
       window.civicrmSubmitOnce = window.submitOnce;
@@ -11,7 +12,7 @@
         // On contribute form submit, do a JS pre-check for empty
         // fields and simulate a failed validation without submission.
         var valid = true;
-        $('input.required, input.creditcard, input#cvv2', this).each(function(i, el) {
+        $('input.required, input.creditcard, input#cvv2', $('form[name=' + formId + ']')).each(function(i, el) {
           if ($(this).val() == '') {
             $(this).addClass('error');
             $(this).after('<span class="crm-error">This field is required</span>');
@@ -31,8 +32,11 @@
         if (valid) {
           // This is the default CiviCRM 'submitOnce' function,
           // delivered inline.
-          civicrmSubmitOnce(obj, formId, procText);
+          return civicrmSubmitOnce(obj, formId, procText);
         }
+        else {
+          return false;
+        }       
       }
     }
   };
@@ -42,4 +46,6 @@
     alvCustom.init();
   });
 })(jQuery);
-*/
+</script>
+{/literal}
+
